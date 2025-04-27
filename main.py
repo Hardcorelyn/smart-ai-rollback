@@ -4,7 +4,7 @@ from sklearn.ensemble import IsolationForest
 import matplotlib.pyplot as plt
 
 # 1. Simulate deployment data for modules
-print("🔍 Simulating deployment data...")
+print("Simulating deployment data...")
 
 # Simulated data for modules - login, dashboard, and payment
 # Format: [latency, error_rate]
@@ -19,7 +19,7 @@ df = pd.DataFrame(data, columns=["Latency", "Error_Rate"])
 modules = ["login", "dashboard", "payment"]
 df["Module"] = np.random.choice(modules, len(df))
 
-print("📊 Sample of generated data:\n", df.head())
+print("Sample of generated data:\n", df.head())
 
 # 2. Train anomaly detection model (Isolation Forest)
 model = IsolationForest(contamination=0.05)
@@ -47,13 +47,6 @@ for idx, row in df.iterrows():
 df["Rollback_Action"] = rollback_actions
 
 # 6. Notify DevOps and take action
-def rollback_decision(module, action):
-    if action == "full":
-        print(f"🚨 Critical issue detected in {module}! Full rollback triggered. Notify DevOps immediately.")
-        # Placeholder for actual notification logic (e.g., email, Slack, etc.)
-    else:
-        print(f"⚠️ {module} issue detected. Partial rollback to previous state.")
-        # Placeholder for partial rollback logic
 
 # 7. Execute rollback actions
 for idx, row in df.iterrows():
@@ -71,7 +64,8 @@ from email.mime.multipart import MIMEMultipart
 
 def send_email(subject, body, to_email):
     from_email = "nnebaby12345@gmail.com"
-    password = "Nne@mka12345"  # Replace with your email password (use app password for Gmail)
+    password = password = "<your-email-password>"
+  # Replace with your email password (use app password for Gmail)
     smtp_server = "smtp.gmail.com"  # Gmail's SMTP server
     smtp_port = 587  # Port for sending emails
 
@@ -80,7 +74,8 @@ def send_email(subject, body, to_email):
     message['From'] = from_email = "nnebaby12345@gmail.com"
     message['To'] = to_email = "nneamakachikwesiri16@gmail.com"
     message['Subject'] =  "Partial rollback triggered in Login Module"
-    message.attach(MIMEText(body, 'A partial rollback has been triggered for the Login module due to a non-critical issue.'))
+    message.attach(MIMEText("a partial rollback has been triggered for login module", "plain")
+)
 
     try:
         server = smtplib.SMTP(smtp_server, smtp_port)
@@ -89,29 +84,29 @@ def send_email(subject, body, to_email):
         text = message.as_string()
         server.sendmail(from_email, to_email, text)
         server.quit()
-        print(f"📧 Email sent to {to_email}")
+        print(f"Email sent to {to_email}")
     except Exception as e:
-        print(f"❌ Failed to send email: {str(e)}")
+        print(f" Failed to send email: {str(e)}")
 
 # Send Email for Partial Rollback
 def send_partial_rollback_email(module):
     send_email(
-        f"⚠️ Partial rollback triggered in {module}",
+        f"Partial rollback triggered in {module}",
         f"A partial rollback has been triggered for the {module} module due to a non-critical issue.",
         "nnebaby12345@gmail.com"  # DevOps team's email
     )
 def rollback_decision(module, action):
     if action == "full":
-        print(f"🚨 Critical issue detected in {module}! Full rollback triggered. Notify DevOps immediately.")
+        print(f"Critical issue detected in {module}! Full rollback triggered. Notify DevOps immediately.")
         
         # Full rollback: Email, Slack, and SMS notifications (just for understanding, but not needed here)
         send_email(
-            f"🚨 Critical issue detected in {module}!",
+            f"Critical issue detected in {module}!",
             f"A full rollback has been triggered for the {module} module.",
             "nnebabay12345@gmail.com"
         )
     else:
-        print(f"⚠️ Partial rollback triggered for {module}.")
+        print(f" Partial rollback triggered for {module}.")
         
         # Only partial rollback: Email notification
         send_partial_rollback_email(module)
