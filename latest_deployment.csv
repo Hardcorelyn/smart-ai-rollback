@@ -1,0 +1,6 @@
+Module,ResponseTime,ErrorRate,CPU,Memory
+Login,120.5,0.3,22.5,50.1
+Payments,700.0,4.2,78.0,300.2
+Dashboard,150.2,0.4,30.0,60.0
+Transfer,860.1,6.7,80.0,410.3
+Settings,130.0,0.2,25.0,45.0
